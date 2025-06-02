@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using InvestmentControl.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvestmentControl.Controllers
@@ -21,12 +20,6 @@ namespace InvestmentControl.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
