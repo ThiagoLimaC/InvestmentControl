@@ -21,7 +21,7 @@ namespace InvestmentControl.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            Investimento investimento = _dbContext.Investimentos.FindAsync(id);
+            Investimento investimento = await _dbContext.Investimentos.FindAsync(id);
             _dbContext.Investimentos.Remove(investimento);
             await _dbContext.SaveChangesAsync();
         }
