@@ -15,9 +15,10 @@ namespace InvestmentControl.Controllers
             _investimentoRepository = investimentoRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var investimentos = await _investimentoRepository.GetAllAsync();
+            return View(investimentos);
         }
 
         [HttpGet]

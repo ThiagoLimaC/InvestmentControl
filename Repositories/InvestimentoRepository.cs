@@ -35,9 +35,26 @@ namespace InvestmentControl.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Investimento>> GetAllAsync()
+        public async Task<List<InvestimentoViewModel>> GetAllAsync()
         {
-            return await _dbContext.Investimentos.ToListAsync();
+            List<Investimento> investimentos = await _dbContext.Investimentos.ToListAsync();
+            List<InvestimentoViewModel> investimentoViewModels = new List<InvestimentoViewModel>();
+
+            foreach (var investimento in investimentos)
+            {
+                var investimentoViewModel = new InvestimentoViewModel()
+                {
+                    InvestimentoId = investimento.InvestimentoId,
+                    Nome = investimento.Nome,
+                    Tipo = investimento.Tipo,
+                    Valor = investimento.Valor,
+                    DataInvestimento = investimento.DataInvestimento
+                };
+
+                investimentoViewModels.Add(investimentoViewModel);
+            }
+
+            return investimentoViewModels;
         }
 
         public async Task<Investimento> GetByIdAsync(int id)
