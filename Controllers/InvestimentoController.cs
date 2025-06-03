@@ -73,6 +73,7 @@ namespace InvestmentControl.Controllers
             }
 
             await _investimentoRepository.AddAsync(model);
+            TempData["MensagemSucesso"] = "Investimento adicionado com sucesso!";
 
             return RedirectToAction("Index", "Investimento");
         }
@@ -94,6 +95,7 @@ namespace InvestmentControl.Controllers
             }
 
             await _investimentoRepository.UpdateAsync(model);
+            TempData["MensagemSucesso"] = "Investimento editado com sucesso!";
 
             return RedirectToAction("Index", "Investimento");
         }
@@ -102,6 +104,7 @@ namespace InvestmentControl.Controllers
         public async Task<IActionResult> Deletar(int id)
         {
             await _investimentoRepository.DeleteAsync(id);
+            TempData["MensagemSucesso"] = "Investimento deletado com sucesso!";
 
             return RedirectToAction("Index", "Investimento");
         }

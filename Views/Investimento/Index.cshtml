@@ -12,6 +12,13 @@
         </div>
     </div>
 
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
     <div class="row">
         <div class="col-md-6">
             <form class="d-flex" asp-controller="Investimento" asp-action="Index">
