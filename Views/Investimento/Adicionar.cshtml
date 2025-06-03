@@ -1,0 +1,50 @@
+﻿@model InvestimentoViewModel
+
+@{
+    ViewData["Title"] = "Adicionar Investimento";
+}
+
+<div class="p-4 container">
+    <div class="row p-4">
+        <div class="col-md-12">
+            <h3>Adicionar novo investimento</h3>
+        </div>
+    </div>
+
+    <div class="row p-4">
+        <div class="col-md-6">
+            <form asp-controller="Investimento" asp-action="Adicionar" method="post">
+                <div class="mb-3">
+                    <label for="Nome" class="form-label fw-bol">Nome do Investimento</label>
+                    <input type="text" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Tipo" class="form-label fw-bol">Tipo de Investimento</label>
+                    <select class="form-select">
+                        <option value="Acao">Ação</option>
+                        <option value="Fundo">Fundo</option>
+                        <option value="Titulo">Título</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Valor" class="form-label fw-bold">Valor</label>
+                    <input type="text" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="datetimepicker" class="form-label fw-bold">Data do Investimento</label>
+                    <input type="date" class="form-control" name="DataInvestimento" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
