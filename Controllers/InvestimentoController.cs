@@ -18,8 +18,14 @@ namespace InvestmentControl.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Adicionar(InvestimentoViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             return View();
         }
     }

@@ -17,7 +17,7 @@
                 <div class="mb-3">
                     <label for="Nome" class="form-label fw-bol">Nome do Investimento</label>
                     <input asp-for="Nome" type="text" class="form-control" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
@@ -28,18 +28,19 @@
                         <option value="Titulo">Título</option>
                         <option value="Outro">Outro</option>
                     </select>
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label for="Valor" class="form-label fw-bold">Valor</label>
                     <input asp-for="Valor" type="text" class="form-control" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label for="datetimepicker" class="form-label fw-bold">Data do Investimento</label>
                     <input asp-for="DataInvestimento" type="date" class="form-control" />
+                    <span asp-validation-for="DataInvestimento" class="text-danger"></span>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Enviar</button>
