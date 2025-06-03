@@ -5,10 +5,10 @@ namespace InvestmentControl.Repositories
 {
     public interface IInvestimentoRepository
     {
-        Task<Investimento> GetByIdAsync(int id);
+        Task<InvestimentoViewModel> GetByIdAsync(int id);
         Task<List<InvestimentoViewModel>> GetAllAsync();
         Task AddAsync(InvestimentoViewModel investimento);
-        Task UpdateAsync(Investimento investimento);
+        Task UpdateAsync(InvestimentoViewModel investimento);
         Task DeleteAsync(int id);
     }
 }

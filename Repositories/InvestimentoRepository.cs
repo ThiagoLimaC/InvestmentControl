@@ -57,14 +57,26 @@ namespace InvestmentControl.Repositories
             return investimentoViewModels;
         }
 
-        public async Task<Investimento> GetByIdAsync(int id)
+        public async Task<InvestimentoViewModel> GetByIdAsync(int id)
         {
-            return await _dbContext.Investimentos.FindAsync(id);
+            var investimento = await _dbContext.Investimentos.FindAsync(id);
+
+            var investimentoViewModel = new InvestimentoViewModel()
+            {
+                InvestimentoId = investimento.InvestimentoId,
+                Nome = investimento.Nome,
+                Tipo = investimento.Tipo,
+                Valor = investimento.Valor,
+                DataInvestimento = investimento.DataInvestimento
+            };
+
+            return investimentoViewModel;
         }
 
-        public async Task UpdateAsync(Investimento investimentoUpdated)
+        public async Task UpdateAsync(InvestimentoViewModel investimentoUpdated)
         {
             var investimento = await _dbContext.Investimentos.FindAsync(investimentoUpdated.InvestimentoId);
+
             investimento.Nome = investimentoUpdated.Nome;
             investimento.Tipo = investimentoUpdated.Tipo;
             investimento.Valor = investimentoUpdated.Valor;

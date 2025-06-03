@@ -21,6 +21,8 @@
                         <th scope="col">Tipo</th>
                         <th scope="col">Valor</th>
                         <th scope="col">Data</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -33,6 +35,21 @@
                             <td>@investimento.Tipo</td>
                             <td>@investimento.Valor</td>
                             <td>@investimento.DataInvestimento</td>
+                            <td>
+                                <a 
+                                    class="btn btn-warning" 
+                                    asp-controller="Investimento" 
+                                    asp-action="Editar" 
+                                    asp-route-id="@investimento.InvestimentoId">Editar</a>
+                            </td>
+                            <td>
+                                <a 
+                                    class="btn btn-danger" 
+                                    asp-controller="Investimento" 
+                                    asp-action="Deletar" 
+                                    asp-route-id="@investimento.InvestimentoId"
+                                    onclick="return confirm('Tem certeza que quer deletar esse investimento?')">Deletar</a>
+                            </td>
                         </tr>
                     }
                 </tbody>

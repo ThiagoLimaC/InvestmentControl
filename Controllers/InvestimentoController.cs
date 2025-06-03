@@ -39,5 +39,34 @@ namespace InvestmentControl.Controllers
 
             return RedirectToAction("Index", "Investimento");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(int id)
+        {
+            var investimento = await _investimentoRepository.GetByIdAsync(id);
+
+            return View(investimento);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(InvestimentoViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await _investimentoRepository.UpdateAsync(model);
+
+            return RedirectToAction("Index", "Investimento");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Deletar(int id)
+        {
+            await _investimentoRepository.DeleteAsync(id);
+
+            return RedirectToAction("Index", "Investimento");
+        }
     }
 }
