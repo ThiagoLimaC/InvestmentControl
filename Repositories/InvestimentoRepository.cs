@@ -1,5 +1,6 @@
 ﻿using InvestmentControl.Data;
 using InvestmentControl.Models;
+using InvestmentControl.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace InvestmentControl.Repositories
@@ -13,9 +14,17 @@ namespace InvestmentControl.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task AddAsync(Investimento investimento)
+        public async Task AddAsync(InvestimentoViewModel investimento)
         {
-            await _dbContext.Investimentos.AddAsync(investimento);
+            var novoInvestimento = new Investimento()
+            {
+                Nome = investimento.Nome,
+                Tipo = investimento.Tipo,
+                Valor = investimento.Valor,
+                DataInvestimento = investimento.DataInvestimento
+            };
+
+            await _dbContext.Investimentos.AddAsync(novoInvestimento);
             await _dbContext.SaveChangesAsync();
         }
 

@@ -1,4 +1,5 @@
 ﻿using InvestmentControl.Models;
+using InvestmentControl.Repositories;
 using InvestmentControl.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +8,13 @@ namespace InvestmentControl.Controllers
 {
     public class InvestimentoController : Controller
     {
+        private readonly IInvestimentoRepository _investimentoRepository;
+
+        public InvestimentoController(IInvestimentoRepository investimentoRepository)
+        {
+            _investimentoRepository = investimentoRepository;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -19,14 +27,16 @@ namespace InvestmentControl.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adicionar(InvestimentoViewModel model)
+        public async Task<IActionResult> Adicionar(InvestimentoViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            return View();
+            await _investimentoRepository.AddAsync(model);
+
+            return RedirectToAction("Index", "Investimento");
         }
     }
 }

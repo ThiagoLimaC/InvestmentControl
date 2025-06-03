@@ -1,4 +1,5 @@
 ﻿using InvestmentControl.Models;
+using InvestmentControl.ViewModels;
 
 namespace InvestmentControl.Repositories
 {
@@ -6,7 +7,7 @@ namespace InvestmentControl.Repositories
     {
         Task<Investimento> GetByIdAsync(int id);
         Task<List<Investimento>> GetAllAsync();
-        Task AddAsync(Investimento investimento);
+        Task AddAsync(InvestimentoViewModel investimento);
         Task UpdateAsync(Investimento investimento);
         Task DeleteAsync(int id);
     }
