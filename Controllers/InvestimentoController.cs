@@ -15,13 +15,44 @@ namespace InvestmentControl.Controllers
             _investimentoRepository = investimentoRepository;
         }
 
-        public async Task<IActionResult> Index(string nomeBusca)
+        public async Task<IActionResult> Index(string nomeBusca, string ordem)
         {
             var investimentos = await _investimentoRepository.GetAllAsync();
 
             if (!String.IsNullOrEmpty(nomeBusca))
             {
                 investimentos = investimentos.Where(i => i.Nome.Contains(nomeBusca)).ToList();
+            }
+
+            ViewData["NomeOrdemParam"] = string.IsNullOrEmpty(ordem) ? "nome_desc" : "";
+            ViewData["DataOrdemParam"] = ordem == "data_asc" ? "data_desc" : "data_asc";
+            ViewData["ValorOrdemParam"] = ordem == "valor_asc" ? "valor_desc" : "valor_asc";
+
+            switch(ordem)
+            {
+                case "nome_desc":
+                    investimentos = investimentos.OrderByDescending(i => i.Nome).ToList();
+                    break;
+
+                case "data_asc":
+                    investimentos = investimentos.OrderBy(i => i.DataInvestimento).ToList();
+                    break;
+
+                case "data_desc":
+                    investimentos = investimentos.OrderByDescending(i => i.DataInvestimento).ToList();
+                    break;
+
+                case "valor_asc":
+                    investimentos = investimentos.OrderBy(i => i.Valor).ToList();
+                    break;
+
+                case "valor_desc":
+                    investimentos = investimentos.OrderByDescending(i => i.Valor).ToList();
+                    break;
+
+                default:
+                    investimentos = investimentos.OrderBy(i => i.Nome).ToList();
+                    break;
             }
 
             return View(investimentos);
