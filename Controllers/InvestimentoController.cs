@@ -15,9 +15,15 @@ namespace InvestmentControl.Controllers
             _investimentoRepository = investimentoRepository;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nomeBusca)
         {
             var investimentos = await _investimentoRepository.GetAllAsync();
+
+            if (!String.IsNullOrEmpty(nomeBusca))
+            {
+                investimentos = investimentos.Where(i => i.Nome.Contains(nomeBusca)).ToList();
+            }
+
             return View(investimentos);
         }
 

@@ -12,6 +12,20 @@
     </div>
 
     <div class="row">
+        <div class="col-md-6">
+            <form class="d-flex" asp-controller="Investimento" asp-action="Index">
+                <input name="nomeBusca" class="form-control me-1" type="search" placeholder="Pesquisar" aria-label="Pesquisar" />
+                <button class="btn btn-primary" type="submit">Pesquise por nome</button>
+            </form>
+
+        </div>
+        <div class="col-md-6">
+            <a asp-action="Index" class="text-dark">Voltar para lista completa</a>
+        </div>
+    </div>
+
+
+    <div class="row">
         <div class="col-md-12">
             <table class="table">
                 <thead>
@@ -36,19 +50,17 @@
                             <td>@investimento.Valor</td>
                             <td>@investimento.DataInvestimento</td>
                             <td>
-                                <a 
-                                    class="btn btn-warning" 
-                                    asp-controller="Investimento" 
-                                    asp-action="Editar" 
-                                    asp-route-id="@investimento.InvestimentoId">Editar</a>
+                                <a class="btn btn-warning"
+                                   asp-controller="Investimento"
+                                   asp-action="Editar"
+                                   asp-route-id="@investimento.InvestimentoId">Editar</a>
                             </td>
                             <td>
-                                <a 
-                                    class="btn btn-danger" 
-                                    asp-controller="Investimento" 
-                                    asp-action="Deletar" 
-                                    asp-route-id="@investimento.InvestimentoId"
-                                    onclick="return confirm('Tem certeza que quer deletar esse investimento?')">Deletar</a>
+                                <a class="btn btn-danger"
+                                   asp-controller="Investimento"
+                                   asp-action="Deletar"
+                                   asp-route-id="@investimento.InvestimentoId"
+                                   onclick="return confirm('Tem certeza que quer deletar esse investimento?')">Deletar</a>
                             </td>
                         </tr>
                     }
