@@ -16,13 +16,13 @@
             <form asp-controller="Investimento" asp-action="Adicionar" method="post">
                 <div class="mb-3">
                     <label for="Nome" class="form-label fw-bol">Nome do Investimento</label>
-                    <input type="text" class="form-control" />
+                    <input asp-for="Nome" type="text" class="form-control" />
                     <span class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label for="Tipo" class="form-label fw-bol">Tipo de Investimento</label>
-                    <select class="form-select">
+                    <select asp-for="Tipo" class="form-select">
                         <option value="Acao">Ação</option>
                         <option value="Fundo">Fundo</option>
                         <option value="Titulo">Título</option>
@@ -33,13 +33,13 @@
 
                 <div class="mb-3">
                     <label for="Valor" class="form-label fw-bold">Valor</label>
-                    <input type="text" class="form-control" />
+                    <input asp-for="Valor" type="text" class="form-control" />
                     <span class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label for="datetimepicker" class="form-label fw-bold">Data do Investimento</label>
-                    <input type="date" class="form-control" name="DataInvestimento" />
+                    <input asp-for="DataInvestimento" type="date" class="form-control" />
                 </div>
 
                 <button type="submit" class="btn btn-primary">Enviar</button>

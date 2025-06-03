@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InvestmentControl.Models;
+using InvestmentControl.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InvestmentControl.Controllers
 {
@@ -15,7 +18,7 @@ namespace InvestmentControl.Controllers
             return View();
         }
 
-        public IActionResult Adicionar(string nome, string tipo, decimal valor, DateTime data)
+        public IActionResult Adicionar(InvestimentoViewModel model)
         {
             return View();
         }
