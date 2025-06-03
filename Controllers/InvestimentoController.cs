@@ -15,13 +15,13 @@ namespace InvestmentControl.Controllers
             _investimentoRepository = investimentoRepository;
         }
 
-        public async Task<IActionResult> Index(string nomeBusca, string ordem)
+        public async Task<IActionResult> Index(string nomeBusca, string ordem, int numeroPagina)
         {
-            var investimentos = await _investimentoRepository.GetAllAsync();
+            var investimentos = _investimentoRepository.GetAllAsync();
 
             if (!String.IsNullOrEmpty(nomeBusca))
             {
-                investimentos = investimentos.Where(i => i.Nome.Contains(nomeBusca)).ToList();
+                investimentos = investimentos.Where(i => i.Nome.Contains(nomeBusca));
             }
 
             ViewData["NomeOrdemParam"] = string.IsNullOrEmpty(ordem) ? "nome_desc" : "";
@@ -31,31 +31,39 @@ namespace InvestmentControl.Controllers
             switch(ordem)
             {
                 case "nome_desc":
-                    investimentos = investimentos.OrderByDescending(i => i.Nome).ToList();
+                    investimentos = investimentos.OrderByDescending(i => i.Nome);
                     break;
 
                 case "data_asc":
-                    investimentos = investimentos.OrderBy(i => i.DataInvestimento).ToList();
+                    investimentos = investimentos.OrderBy(i => i.DataInvestimento);
                     break;
 
                 case "data_desc":
-                    investimentos = investimentos.OrderByDescending(i => i.DataInvestimento).ToList();
+                    investimentos = investimentos.OrderByDescending(i => i.DataInvestimento);
                     break;
 
                 case "valor_asc":
-                    investimentos = investimentos.OrderBy(i => i.Valor).ToList();
+                    investimentos = investimentos.OrderBy(i => i.Valor);
                     break;
 
                 case "valor_desc":
-                    investimentos = investimentos.OrderByDescending(i => i.Valor).ToList();
+                    investimentos = investimentos.OrderByDescending(i => i.Valor);
                     break;
 
                 default:
-                    investimentos = investimentos.OrderBy(i => i.Nome).ToList();
+                    investimentos = investimentos.OrderBy(i => i.Nome);
                     break;
             }
 
-            return View(investimentos);
+
+            if (numeroPagina < 1)
+            {
+                numeroPagina = 1;
+            }
+
+            int tamanhoPagina = 5;
+
+            return View(await PaginatedList<InvestimentoViewModel>.CreateAsync(investimentos, numeroPagina, tamanhoPagina));
         }
 
         [HttpGet]

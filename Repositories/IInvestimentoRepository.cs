@@ -6,7 +6,7 @@ namespace InvestmentControl.Repositories
     public interface IInvestimentoRepository
     {
         Task<InvestimentoViewModel> GetByIdAsync(int id);
-        Task<List<InvestimentoViewModel>> GetAllAsync();
+        IQueryable<InvestimentoViewModel> GetAllAsync();
         Task AddAsync(InvestimentoViewModel investimento);
         Task UpdateAsync(InvestimentoViewModel investimento);
         Task DeleteAsync(int id);

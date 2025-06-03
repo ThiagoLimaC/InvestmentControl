@@ -29,3 +29,19 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #191970;
+    border-color: #191970;
+}
+
+.table thead th {
+    background-color: #191970;
+    color: #fff; 
+}
+
+.page-item.active .page-link {
+    background-color: #191970;
+    border-color: #191970;
+}
