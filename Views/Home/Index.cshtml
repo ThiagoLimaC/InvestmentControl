@@ -1,8 +1,57 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    var tipos = ViewBag.Tipos;
+    var valores = ViewBag.Valores;
+
+    var tiposSerializado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(tipos));
+    var valoresSerializado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(valores));
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" style="width: 35rem">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Investimentos por tipo</h5>
+                <canvas id="grafico"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var tipos = @tiposSerializado;
+        var valores = @valoresSerializado;
+
+        $(document).ready(function(){
+          var ctx = $('#grafico');
+
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: tipos,
+              datasets: [{
+                data: valores,
+                borderWidth: 1
+              }]
+            },
+            options: {
+             plugins: {
+                legend: {
+                    display: false
+                }
+            },
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        });
+    </script>
+}
+

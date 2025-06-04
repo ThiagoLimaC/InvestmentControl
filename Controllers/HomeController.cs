@@ -1,19 +1,33 @@
 using System.Diagnostics;
+using InvestmentControl.Data;
+using InvestmentControl.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvestmentControl.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _investimentoRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext investimentoRepository)
         {
-            _logger = logger;
+            _investimentoRepository = investimentoRepository;
         }
 
         public IActionResult Index()
         {
+            var dados = _investimentoRepository.Investimentos
+                .GroupBy(i => i.Tipo)
+                .Select(g => new
+                {
+                    Tipo = g.Key,
+                    TotalInvestido = g.Sum(i => i.Valor)
+                })
+                .ToList();
+
+            ViewBag.Tipos = dados.Select(d => d.Tipo).ToList();
+            ViewBag.Valores = dados.Select(d => d.TotalInvestido).ToList();
+
             return View();
         }
 
