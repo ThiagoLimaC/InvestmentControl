@@ -25,6 +25,13 @@ namespace InvestmentControl.Controllers
                 })
                 .ToList();
 
+            var ultimosCadastros = _investimentoRepository.Investimentos
+                .OrderByDescending(i => i.InvestimentoId)
+                .Take(5)
+                .ToList();
+
+            ViewBag.Ultimos = ultimosCadastros;
+            ViewBag.Dados = dados;
             ViewBag.Tipos = dados.Select(d => d.Tipo).ToList();
             ViewBag.Valores = dados.Select(d => d.TotalInvestido).ToList();
 

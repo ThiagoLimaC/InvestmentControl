@@ -8,17 +8,88 @@
     var valoresSerializado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(valores));
 }
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card" style="width: 35rem">
-            <div class="card-body">
-                <h5 class="card-title mb-4">Investimentos por tipo</h5>
-                <canvas id="grafico"></canvas>
+
+<div class="container p-4">
+
+    <div class="col-md-10">
+        <h2>
+            <i class="fs-1 bi bi-speedometer2"></i>
+            Dashboard
+        </h2>
+    </div>
+
+
+    <div class="row">
+        <div class="row mb-5 mt-3 p-3 border-top">
+            @foreach (var t in ViewBag.Dados)
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card h-100">
+                        <div class="card-header bg-card-header text-white">@t.Tipo.ToString()</div>
+                        <div class="card-body">
+                            <p class="card-text fs-5">R$ @t.TotalInvestido.ToString()</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-card-header text-white mb-3">Gráfico de Barras</div>
+                <div class="card-body">
+                    <canvas id="grafico"></canvas>
+                </div>
             </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-card-header text-white mb-3">Gráfico de Doughnut</div>
+                <div class="card-body">
+                    <canvas id="graficoDoughnut"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mt-4">
+
+            <div class="card">
+                <div class="card-header bg-card-header text-white">Últimos investimentos cadastrados</div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Data</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var i in ViewBag.Ultimos)
+                            {
+                                <tr>
+                                    <th scope="row">@i.InvestimentoId</th>
+                                    <td>@i.Nome</td>
+                                    <td>@i.Tipo</td>
+                                    <td>@i.Valor</td>
+                                    <td>@i.DataInvestimento</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -51,6 +122,32 @@
               }
             }
           });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            var ctx = $('#graficoDoughnut');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: tipos,
+                    datasets: [{
+                        data: valores,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        },
+                        title: {
+                            display: false,
+                        }
+                    }
+                }
+            });
         });
     </script>
 }
