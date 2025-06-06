@@ -50,6 +50,20 @@ namespace InvestmentControl.Repositories
             return investimentos;
         }
 
+        public List<TotalInvestidoPorTipoDto> GetTotalInvestidoPorTipos()
+        {
+            var dados = _dbContext.Investimentos
+                .GroupBy(i => i.Tipo)
+                .Select(g => new TotalInvestidoPorTipoDto
+                {
+                    Tipo = g.Key,
+                    TotalInvestido = g.Sum(i => i.Valor)
+                })
+                .ToList();
+            
+            return dados;
+        }
+
         public async Task<InvestimentoViewModel> GetByIdAsync(int id)
         {
             var investimento = await _dbContext.Investimentos.FindAsync(id);

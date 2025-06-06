@@ -7,32 +7,25 @@ namespace InvestmentControl.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _investimentoRepository;
+        private readonly IInvestimentoRepository _investimentoRepository;
 
-        public HomeController(AppDbContext investimentoRepository)
+        public HomeController(IInvestimentoRepository investimentoRepository)
         {
             _investimentoRepository = investimentoRepository;
         }
 
         public IActionResult Index()
         {
-            var dados = _investimentoRepository.Investimentos
-                .GroupBy(i => i.Tipo)
-                .Select(g => new
-                {
-                    Tipo = g.Key,
-                    TotalInvestido = g.Sum(i => i.Valor)
-                })
-                .ToList();
+            var dados = _investimentoRepository.GetTotalInvestidoPorTipos();
 
-            var ultimosCadastros = _investimentoRepository.Investimentos
-                .OrderByDescending(i => i.InvestimentoId)
-                .Take(5)
-                .ToList();
+            var investimentos = _investimentoRepository.GetAllAsync();
 
-            ViewBag.Ultimos = ultimosCadastros;
+            var ultimosCadastrados = investimentos.OrderByDescending(i => i.InvestimentoId)
+                .Take(5).ToList();
+
+            ViewBag.Ultimos = ultimosCadastrados;
             ViewBag.Dados = dados;
-            ViewBag.Tipos = dados.Select(d => d.Tipo).ToList();
+            ViewBag.Tipos = dados.Select(i => i.Tipo).ToList();
             ViewBag.Valores = dados.Select(d => d.TotalInvestido).ToList();
 
             return View();

@@ -10,5 +10,6 @@ namespace InvestmentControl.Repositories
         Task AddAsync(InvestimentoViewModel investimento);
         Task UpdateAsync(InvestimentoViewModel investimento);
         Task DeleteAsync(int id);
+        List<TotalInvestidoPorTipoDto> GetTotalInvestidoPorTipos();
     }
 }
