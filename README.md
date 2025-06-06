@@ -1,6 +1,6 @@
 ﻿# InvestmentControl
 
-<img src="wwwroot/img/docVideo.gif" width="700px">
+<img src="wwwroot/img/docVideo.gif" width="800px">
 
 ## Visão Geral
 
