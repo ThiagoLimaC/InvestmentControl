@@ -32,6 +32,7 @@
                             <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
                                 <i class="fs-4 bi bi-coin"></i>
                                 <span class="ms-1 d-none d-sm-inline">Investimentos</span>
+                                <i class="bi bi-chevron-right ms-2 transition" id="investimentos-arrow"></i>
                             </a>
 
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
@@ -39,6 +40,7 @@
                                     <a asp-controller="Investimento" asp-action="Index" class="nav-link px-0 text-white">
                                         <i class="fs-5 bi bi-view-list"></i>
                                         <span class="ms-1 d-none d-sm-inline">Listar</span>
+                                        
                                     </a>
                                 </li>
                                 <li>
@@ -67,9 +69,38 @@
             &copy; 2025 - InvestmentControl 
         </div>
     </footer>
+
+    @section Scripts {
+        
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var submenu = document.getElementById('submenu1');
+            var arrow = document.getElementById('investimentos-arrow');
+
+            submenu.addEventListener('show.bs.collapse', function () {
+                arrow.classList.remove('bi-chevron-right');
+                arrow.classList.add('bi-chevron-down');
+            });
+            submenu.addEventListener('hide.bs.collapse', function () {
+                arrow.classList.remove('bi-chevron-down');
+                arrow.classList.add('bi-chevron-right');
+            });
+
+            if (submenu.classList.contains('show')) {
+                arrow.classList.remove('bi-chevron-right');
+                arrow.classList.add('bi-chevron-down');
+            } else {
+                arrow.classList.remove('bi-chevron-down');
+                arrow.classList.add('bi-chevron-right');
+            }
+        });
+    </script>
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>

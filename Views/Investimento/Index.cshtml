@@ -36,8 +36,8 @@
         <div class="col-md-12">
             <table class="table table-bordered table-striped">
                 <thead>
-                    <tr>
-                        <th scope="col">#</th>
+                    <tr class="text-center">
+                        <th scope="col" >#</th>
                         <th scope="col"><a class="text-white" asp-controller="Investimento" asp-action="Index" asp-route-ordem="@ViewData["NomeOrdemParam"]">Nome</a></th>
                         <th scope="col">Tipo</th>
                         <th scope="col"><a class="text-white" asp-controller="Investimento" asp-action="Index" asp-route-ordem="@ViewData["ValorOrdemParam"]">Valor</a></th>
@@ -49,14 +49,14 @@
                 <tbody>
                     @foreach (var investimento in Model.Items)
                     {
-                        <tr>
+                        <tr class="text-center">
                             <th scope="row">@investimento.InvestimentoId</th>
-                            <td>@investimento.Nome</td>
+                            <td class="text-start">@investimento.Nome</td>
                             <td>@investimento.Tipo</td>
-                            <td>@investimento.Valor</td>
-                            <td>@investimento.DataInvestimento</td>
-                            <td>
-                                <a class="btn btn-warning"
+                            <td>@investimento.Valor.ToString("N2")</td>
+                            <td>@investimento.DataInvestimento.ToString("dd/MM/yyyy")</td>
+                            <td class="text-center">
+                                <a class="btn btn-warning me-3"
                                    asp-controller="Investimento"
                                    asp-action="Editar"
                                    asp-route-id="@investimento.InvestimentoId">Editar</a>

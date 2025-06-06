@@ -12,53 +12,57 @@
 <div class="container p-4">
 
     <div class="col-md-10">
-        <h2>
+        
+    </div>
+
+
+    <div class="row">
+
+        <h2 class="mb-5">
             <i class="fs-1 bi bi-speedometer2"></i>
             Dashboard
         </h2>
-    </div>
 
-
-    <div class="row">
-        <div class="row mb-4 mt-3 p-3 border-top">
-            @foreach (var t in ViewBag.Dados)
-            {
-                <div class="col-md-3">
-                    <div class="card h-100">
-                        <div class="card-header bg-card-header text-white">@t.Tipo.ToString()</div>
-                        <div class="card-body">
-                            <p class="card-text fs-5">R$ @t.TotalInvestido.ToString()</p>
-                        </div>
+        @foreach (var t in ViewBag.Dados)
+        {
+            <div class="col-md-3 mb-5">
+                <div class="card h-100">
+                    <div class="card-header bg-card-header text-white">@t.Tipo.ToString()</div>
+                    <div class="card-body">
+                        <p class="card-text fs-5 text-center">R$ @t.TotalInvestido.ToString("N2")</p>
                     </div>
                 </div>
-            }
-        </div>
-
+            </div>
+        }
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-card-header text-white mb-3">Gráfico de Barras</div>
-                <div class="card-body">
-                    <canvas id="grafico"></canvas>
+            <div class="card h-100">
+                <div class="card-header bg-card-header text-white mb-3">
+                    <i class="bi bi-bar-chart-fill me-2"></i>
+                    Gráfico de Barras
+                </div>
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <canvas id="grafico" style="max-width: 100%; height: 200px;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-card-header text-white mb-3">
+                    <i class="bi bi-pie-chart-fill me-2"></i>
+                    Gráfico de Doughnut
+                </div>
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <canvas id="graficoDoughnut" style="max-width: 100%; height: 200px;"></canvas>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-card-header text-white mb-3">Gráfico de Doughnut</div>
-                <div class="card-body">
-                    <canvas id="graficoDoughnut"></canvas>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
         <div class="col-md-12 mt-4">
-
             <div class="card">
-                <div class="card-header bg-card-header text-white">Últimos investimentos cadastrados</div>
+                <div class="card-header bg-card-header text-white">
+                    <i class="bi bi-table me-2"></i>
+                    Últimos investimentos cadastrados
+                </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -74,19 +78,18 @@
                         <tbody>
                             @foreach (var i in ViewBag.Ultimos)
                             {
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="row">@i.InvestimentoId</th>
-                                    <td>@i.Nome</td>
+                                    <td class="text-start">@i.Nome</td>
                                     <td>@i.Tipo</td>
-                                    <td>@i.Valor</td>
-                                    <td>@i.DataInvestimento</td>
+                                    <td>@i.Valor.ToString("N2")</td>
+                                    <td>@i.DataInvestimento.ToString("dd/MM/yyyy")</td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
-            
         </div>
     </div>
 </div>

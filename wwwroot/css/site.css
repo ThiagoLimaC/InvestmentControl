@@ -52,7 +52,16 @@ body {
     color: #fff !important;
 }
 
+#grafico {
+    max-height: 230px;
+    min-height: 235px;
+}
+
 #graficoDoughnut {
     max-height: 230px;
     min-height: 235px;
+}
+
+.transition {
+    transition: transform 0.3s;
 }
